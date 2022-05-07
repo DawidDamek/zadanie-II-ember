@@ -4,8 +4,8 @@ import { inject as service } from '@ember/service';
 export default class PostShowRoute extends Route {
   @service store;
 
-  async model(params) {
-    const user = await this.store.findRecord('post', params.id);
+  async model({ id }) {
+    const user = await this.store.findRecord('post', id);
     return user;
   }
 }
