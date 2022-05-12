@@ -5,7 +5,7 @@ export default class PostShowRoute extends Route {
   @service store;
 
   async model({ id }) {
-    const user = await this.store.findRecord('post', id);
-    return user;
+    const post = await this.store.findRecord('post', id);
+    return post;
   }
 }
