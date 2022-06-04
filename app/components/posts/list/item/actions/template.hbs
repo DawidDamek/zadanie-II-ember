@@ -12,4 +12,6 @@
   </a>
 {{/if}}
 
-<a href='#' class='card-link'>Delete</a>
+{{#if this.isCreatedByCurrentUser}}
+  <a href='#' class='card-link' {{on 'click' this.onDelete}}>Delete</a>
+{{/if}}
