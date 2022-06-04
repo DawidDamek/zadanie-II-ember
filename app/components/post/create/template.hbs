@@ -1,0 +1,6 @@
+<button type='button' class='btn btn-success' {{on 'click' this.onShowModal}}>
+  create
+</button>
+{{#if this.isShowCreateModal}}
+  <Post::Create::Modal @onClose={{this.onHideModal}} />
+{{/if}}
