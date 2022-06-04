@@ -2,5 +2,13 @@
   create
 </button>
 {{#if this.isShowCreateModal}}
-  <Post::Create::Modal @onClose={{this.onHideModal}} />
+  <Post::Create::Modal
+    @title={{this.title}}
+    @content={{this.content}}
+    @hasEmptyFields={{this.hasEmptyFields}}
+    @onTitleChange={{this.onTitleChange}}
+    @onContentChange={{this.onContentChange}}
+    @onClose={{this.onHideModal}}
+    @onSave={{this.onSave}}
+  />
 {{/if}}
