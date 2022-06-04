@@ -1,5 +1,6 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
+import { scheduleOnce } from '@ember/runloop';
 
 export default class ApplicationRoute extends Route {
   @service store;
@@ -57,9 +58,17 @@ export default class ApplicationRoute extends Route {
     const like1 = {
       user: user1Model,
       post: post3Model,
+      id: 1,
     };
 
     const like1Model = this.store.createRecord('like', like1);
     await like1Model.save();
+
+    this._fixLikeRelationship();
+  }
+
+  _fixLikeRelationship() {
+    const fetchLikes = async () => this.store.findAll('like');
+    scheduleOnce('afterRender', this, fetchLikes);
   }
 }
