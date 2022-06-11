@@ -5,7 +5,6 @@ export default class PostsRoute extends Route {
   @service store;
 
   model(params) {
-    console.log(params);
     const posts = this.store.findAll('post');
     return posts;
   }

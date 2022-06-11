@@ -16,13 +16,11 @@ export default class CreateodalComponent extends Component {
 
   @action
   onShowModal() {
-    console.log('show');
     this.isShowCreateModal = true;
   }
 
   @action
   onHideModal() {
-    console.log('hide');
     this.isShowCreateModal = false;
     this.clearFields();
   }
@@ -30,13 +28,11 @@ export default class CreateodalComponent extends Component {
   @action
   onTitleChange(event) {
     this.title = event.target.value;
-    console.log(this.title);
   }
 
   @action
   onContentChange(event) {
     this.content = event.target.value;
-    console.log(this.content);
   }
 
   @action
