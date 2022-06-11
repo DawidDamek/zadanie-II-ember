@@ -44,7 +44,7 @@ export default class CreateodalComponent extends Component {
     const post = {
       owner: this.session.currentUser,
       title: this.title,
-      body: this.body,
+      body: this.content,
     };
     const postModel = this.store.createRecord('post', post);
     await postModel.save();
