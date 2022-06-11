@@ -6,8 +6,9 @@ import { action } from '@ember/object';
 export default class HomePostsController extends Controller {
   @tracked dateFrom;
   @tracked dateTo;
+  @tracked sort;
 
-  queryParams = ['dateFrom', 'dateTo'];
+  queryParams = ['dateFrom', 'dateTo', 'sort'];
 
   get shouldBeFilteredBetweenDates() {
     return Boolean(this.startDate && this.endDate);
@@ -17,6 +18,13 @@ export default class HomePostsController extends Controller {
   }
   get shouldBeFilteredToDate() {
     return !this.shouldBeFilteredBetweenDates && Boolean(this.endDate);
+  }
+
+  get sortLabel() {
+    if (!this.sort) {
+      return '';
+    }
+    return this.sort === 'ASC' ? '↓' : '↑';
   }
 
   get startDate() {
@@ -67,6 +75,17 @@ export default class HomePostsController extends Controller {
     return posts;
   }
 
+  get sortedPosts() {
+    if (this.sort === 'ASC') {
+      return this.filteredPosts.sortBy('createdAtInMiliseconds');
+    }
+
+    if (this.sort === 'DESC') {
+      return this.filteredPosts.sortBy('createdAtInMiliseconds').reverse();
+    }
+    return this.filteredPosts;
+  }
+
   @action
   onStartDateChange(date) {
     this.dateFrom = moment(date).format('YYYY-MM-DD');
@@ -75,6 +94,17 @@ export default class HomePostsController extends Controller {
   @action
   onEndDateChange(date) {
     this.dateTo = moment(date).format('YYYY-MM-DD');
+  }
+
+  @action
+  onSortToggle() {
+    if (!this.sort) {
+      return (this.sort = 'ASC');
+    }
+    if (this.sort === 'ASC') {
+      return (this.sort = 'DESC');
+    }
+    this.sort = undefined;
   }
 
   @action

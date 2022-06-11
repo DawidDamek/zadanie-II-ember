@@ -9,4 +9,8 @@ export default class PostModel extends Model {
   isDeleted;
   @belongsTo('user', { autoSave: true }) owner;
   @hasMany('like') likes;
+
+  get createdAtInMilisecond() {
+    return new Date(this.createdAt).getTime();
+  }
 }
