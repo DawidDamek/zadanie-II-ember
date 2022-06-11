@@ -8,14 +8,4 @@ export default class PostModel extends Model {
   isDeleted;
   @belongsTo('user', { autoSave: true }) owner;
   @hasMany('like') likes;
-
-  get fullDate() {
-    const date = new Date(this.createdAt);
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-
-    const dateString = `${day}-${month}-${year}`;
-    return dateString;
-  }
 }
