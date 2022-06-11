@@ -1,7 +1,12 @@
 import Controller from '@ember/controller';
 import moment from 'moment';
+import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object';
 
 export default class HomePostsController extends Controller {
+  @tracked dateFrom;
+  @tracked dateTo;
+
   queryParams = ['dateFrom', 'dateTo'];
 
   get shouldBeFilteredByDate() {
@@ -22,6 +27,14 @@ export default class HomePostsController extends Controller {
     return moment(this.dateTo).endOf('day');
   }
 
+  get minDate() {
+    return this.startDate?.toDate();
+  }
+
+  get maxDate() {
+    return this.endDate?.toDate();
+  }
+
   get filteredPosts() {
     const posts = this.model;
     if (this.shouldBeFilteredByDate) {
@@ -35,5 +48,21 @@ export default class HomePostsController extends Controller {
       });
     }
     return posts;
+  }
+
+  @action
+  onStartDateChange(date) {
+    this.dateFrom = moment(date).format('YYYY-MM-DD');
+  }
+
+  @action
+  onEndDateChange(date) {
+    this.dateTo = moment(date).format('YYYY-MM-DD');
+  }
+
+  @action
+  clearFilters() {
+    this.dateTo = null;
+    this.dateFrom = null;
   }
 }
