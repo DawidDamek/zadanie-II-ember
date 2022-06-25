@@ -58,8 +58,21 @@ export default class HomePostsController extends Controller {
     return this.endDate?.toDate();
   }
 
+  get shouldBeFilteredByAuthors() {
+    return this.selectedAuthors.length;
+  }
+
   get filteredPosts() {
-    const posts = this.model;
+    let posts = this.model;
+
+    if (this.shouldBeFilteredByAuthors) {
+      posts = posts.filter((post) => {
+        return this.selectedAuthors.find((author) => {
+          return author.get('id') === post.owner.get('id');
+        });
+      });
+    }
+
     if (this.shouldBeFilteredBetweenDates) {
       return posts.filter((post) => {
         return moment(post.createdAt).isBetween(
