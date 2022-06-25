@@ -6,7 +6,6 @@ export default class SharedUserSelectorComponent extends Component {
 
   constructor() {
     super(...arguments);
-
     this.options = this.args.options || this.store.findAll('user');
   }
 }

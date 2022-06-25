@@ -2,6 +2,7 @@ import Controller from '@ember/controller';
 import moment from 'moment';
 import { tracked } from '@glimmer/tracking';
 import { action } from '@ember/object';
+
 export default class HomePostsController extends Controller {
   @tracked dateFrom;
   @tracked dateTo;
