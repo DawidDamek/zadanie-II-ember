@@ -59,7 +59,7 @@ export default class HomePostsController extends Controller {
   }
 
   get shouldBeFilteredByAuthors() {
-    return this.selectedAuthors.length;
+    return Boolean(this.selectedAuthors.length);
   }
 
   get filteredPosts() {
